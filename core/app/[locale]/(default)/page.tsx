@@ -58,15 +58,15 @@ export default async function Home({ params: { locale } }: Props) {
 
   return (
     <>
-      <Slideshow />
+      {/* <Slideshow /> */}
 
       <div className="my-10">
-        <ProductCardCarousel
+        {/* <ProductCardCarousel
           products={featuredProducts}
           showCart={false}
           showCompare={false}
           title={t('Carousel.featuredProducts')}
-        />
+        /> */}
         <ProductCardCarousel
           products={newestProducts}
           showCart={false}

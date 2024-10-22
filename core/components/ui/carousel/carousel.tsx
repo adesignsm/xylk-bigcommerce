@@ -8,12 +8,12 @@ type CarouselApi = UseEmblaCarouselType[1];
 
 interface Props {
   className?: string;
-  pageSize?: 2 | 3 | 4;
+  pageSize?: 2 | 3 | 4 | 100;
   products: ReactNode[];
   title: string;
 }
 
-const Carousel = ({ className, title, pageSize = 4, products, ...props }: Props) => {
+const Carousel = ({ className, title, pageSize = 100, products, ...props }: Props) => {
   const id = useId();
   const titleId = useId();
   const itemsPerGroup = pageSize;
@@ -105,36 +105,7 @@ const Carousel = ({ className, title, pageSize = 4, products, ...props }: Props)
       {...props}
     >
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-black lg:text-4xl" id={titleId}>
-          {title}
-        </h2>
-        <span className="no-wrap flex">
-          <button
-            aria-label="Previous products"
-            className={cn(
-              'inline-flex h-12 w-12 items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:text-gray-400',
-              api?.scrollSnapList().length === 1 && 'hidden',
-            )}
-            disabled={!canScrollPrev}
-            onClick={scrollPrev}
-          >
-            <ArrowLeft />
-            <span className="sr-only">Previous slide</span>
-          </button>
-
-          <button
-            aria-label="Next products"
-            className={cn(
-              'inline-flex h-12 w-12 items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:text-gray-400',
-              api?.scrollSnapList().length === 1 && 'hidden',
-            )}
-            disabled={!canScrollNext}
-            onClick={scrollNext}
-          >
-            <ArrowRight />
-            <span className="sr-only">Next slide</span>
-          </button>
-        </span>
+        <span className="no-wrap flex"></span>
       </div>
 
       <div className="-mx-2 overflow-hidden px-2" ref={carouselRef}>
@@ -144,7 +115,7 @@ const Carousel = ({ className, title, pageSize = 4, products, ...props }: Props)
               aria-label={`${index + 1} of ${groupedProducts.length}`}
               aria-roledescription="slide"
               className={cn(
-                'grid min-w-0 shrink-0 grow-0 basis-full grid-cols-2 gap-6 px-4 md:grid-cols-4 lg:gap-8',
+                'grid min-w-0 shrink-0 grow-0 basis-full grid-cols-1 gap-6 px-4 md:grid-cols-4 lg:gap-8',
                 !slidesInView.includes(index) && 'invisible',
               )}
               id={`${id}-slide-${index + 1}`}
